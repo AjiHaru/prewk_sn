@@ -1,0 +1,293 @@
+@mixin mq {
+  @media (max-width: 600px) {
+    @content;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
+.wrapper {
+  background: white;
+  width: 100%;
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  z-index: 1;
+  img {
+    width: 100%;
+    aspect-ratio: 35 / 8;
+  }
+  @include mq {
+    width: 100%;
+    margin: 0;
+  }
+}
+main {
+  margin: 0 auto;
+  padding-top: 80px;
+}
+
+// ハンバーガーメニューウィンドウ
+.nav-menu {
+  width: 300px;
+  height: 100vh;
+  opacity: 0;
+  position: fixed;
+  top: 0;
+  left: -300px;
+  z-index: 50;
+  padding: 60px 25px;
+  background-color: black;
+  color: #ffffff;
+  visibility: hidden;
+  transition: all 0.5s ease-out;
+  li {
+    line-height: 42px;
+  }
+}
+
+.nav-menu.active {
+  left: 0;
+  visibility: visible;
+  opacity: 1;
+}
+
+.nav-link {
+  li {
+    border-top: 1px solid white;
+    padding: 20px 0;
+  }
+  li:nth-child(3) {
+    border-bottom: 1px solid white;
+  }
+}
+.nav-sns {
+  margin-top: 5rem;
+}
+
+// ハンバーガーボタン
+.hamburger {
+  display: block;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  transition: 0.4s;
+  position: relative;
+  span {
+    width: 30px;
+    height: 2px;
+    background: black;
+    position: absolute;
+    right: 0;
+    transition: 0.4s ease-in-out;
+  }
+  span:nth-child(1) {
+    /*1本目の線*/
+    top: 5px;
+  }
+  span:nth-child(2) {
+    /*2本目の線*/
+    top: 15px;
+  }
+  span:nth-child(3) {
+    /*3本目の線*/
+    top: 25px;
+  }
+}
+
+// ×アイコン
+.hamburger.active {
+  z-index: 100;
+  span:nth-child(1) {
+    background-color: #ffffff;
+    transform: rotate(-405deg);
+    top: 15px;
+  }
+  span:nth-child(2) {
+    background-color: #ffffff;
+    opacity: 0;
+    transition: opacity 0.5s;
+  }
+  span:nth-child(3) {
+    background-color: #ffffff;
+    transform: rotate(405deg);
+    top: 15px;
+  }
+}
+
+// ハンバーガーボタンクリック時の黒い画面
+.overlap {
+  display: none; /*最初は非表示*/
+  background-color: black;
+  z-index: 10;
+  width: 100%;
+  height: 100vh;
+  opacity: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  visibility: hidden;
+}
+.overlap.active {
+  display: block;
+  opacity: 0.75;
+  visibility: visible;
+}
+
+.mainvisual {
+  margin-bottom: 100px;
+  .mainvideo {
+    width: 100%;
+  }
+}
+
+.sec-title {
+  margin-bottom: 30px;
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+#PICKUP {
+  margin-bottom: 100px;
+  width: 100%;
+  .slide {
+    .photo {
+      margin: 30px;
+      aspect-ratio: 50 / 33;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+}
+
+// FEATUREグリッドレイアウト
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  justify-items: center;
+  gap: 32px;
+  max-width: 1240px;
+  margin: 0 auto 60px;
+  padding: 0 16px;
+  .feature-item {
+    box-shadow: 0 0 10px 5px #d9d9d9;
+    img {
+      width: 100%;
+      height: 256px;
+      object-fit: cover;
+    }
+    .item-detail {
+      padding: 30px;
+      line-height: 1rem;
+      .item-title {
+        padding-bottom: 1.5rem;
+        font-size: 0.75rem;
+      }
+      .item-text {
+        font-weight: bold;
+        margin-bottom: 20px;
+      }
+      .item-date {
+        text-align: end;
+        font-size: 0.75rem;
+      }
+    }
+  }
+}
+
+.item-fadein {
+  opacity: 0;
+  transform: translate(0, 50px);
+  transition: all 1s;
+}
+.item-fadein.show {
+  opacity: 1;
+  transform: none;
+}
+
+#CONTACT {
+  color: #ffffff;
+  background-color: black;
+  font-size: 0.85rem;
+  .sec-title {
+    padding-top: 50px;
+  }
+  .contact-container {
+    display: flex;
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0 16px;
+    gap: 50px;
+    @include mq {
+      flex-direction: column;
+    }
+
+    .contact-text {
+      width: 50%;
+      @include mq {
+        width: 100%;
+      }
+      .contact-detail {
+        margin-bottom: 30px;
+        line-height: 1.75rem;
+      }
+    }
+    .contact-form {
+      width: 50%;
+      @include mq {
+        width: 100%;
+      }
+      dt {
+        font-weight: normal;
+        padding-bottom: 10px;
+      }
+      dd {
+        border: solid 1px #ffffff;
+        background-color: #ffffff;
+        margin-bottom: 20px;
+        color: black;
+        input {
+          height: 44px;
+          width: 100%;
+        }
+        textarea {
+          height: 68px;
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+.sendbtn {
+  width: 200px;
+  height: 50px;
+  text-align: center;
+  border: solid 1px #ffffff;
+  margin-top: 25px;
+  line-height: 50px;
+  @include mq {
+    width: 100%;
+  }
+}
+.sendbtn:hover {
+  color: black;
+  background-color: #ffffff;
+  cursor: pointer;
+}
+
+footer {
+  color: #ffffff;
+  background-color: black;
+  text-align: center;
+  padding: 60px 0 20px;
+}
